@@ -36,18 +36,28 @@ namespace TechJobsPersistentAutograded.Controllers
         [HttpGet("/Add")]
         public IActionResult AddJob()
         {
-            return View();
+            //3. an instance of AddEmployerViewModel inside of the Add() method and pass the instance into the View() return method.
+            AddJobViewModel addJobViewModel = new AddJobViewModel();
+            return View(addJobViewModel);
         }
 
-
-        public IActionResult ProcessAddJobForm()
+        //4.Add the appropriate code to ProcessAddEmployerForm() so that it will process form submissions
+        [HttpPost]
+        public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel)
         {
             if (ModelState.IsValid)
             {
+               Job job = new Job
+                {
+                    Name = addJobViewModel.Name,
+                    EmployerId = addJobViewModel.EmployerId
+                };
+                _repo.AddNewJob(job);
+                _repo.SaveChanges();
                 return Redirect("Index");
             }
 
-            return View("Add");
+            return View("AddJob", addJobViewModel);
         }
 
 
