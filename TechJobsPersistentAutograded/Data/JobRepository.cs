@@ -11,6 +11,8 @@ namespace TechJobsPersistentAutograded.Data
         IEnumerable<Job> GetAllJobs();
         IEnumerable<Employer> GetAllEmployers();
         IEnumerable<Skill> GetAllSkills();
+
+        IEnumerable<JobSkill> GetAllJobSkills(); //I added this.
         Employer FindEmployerById(int id);
         void AddNewJobSkill(JobSkill newJobSkill);
         void AddNewJob(Job newJob);
@@ -74,6 +76,11 @@ namespace TechJobsPersistentAutograded.Data
             return _context.Skills.ToList();
         }
 
+        //I added this for all the jobskills table.
+        public virtual IEnumerable<JobSkill> GetAllJobSkills()
+        {
+            return _context.JobSkills.ToList();
+        }
         public virtual void AddNewJobSkill(JobSkill newJobSkill)
         {
             _context.JobSkills.Add(newJobSkill);
@@ -89,7 +96,7 @@ namespace TechJobsPersistentAutograded.Data
             _context.SaveChanges();
         }
 
-        public virtual Job FindJobById(int id)
+        public virtual Job FindJobById(int id) // 
         {
             return _context.Jobs.Include(j => j.Employer).Single(j => j.Id == id);
         }

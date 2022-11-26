@@ -29,6 +29,7 @@ namespace TechJobsPersistentAutograded.Controllers
             return View(employers);
         }
 
+        //This is the get request add method when first time the page is loaded.
         public IActionResult Add()
         {
             //3. an instance of AddEmployerViewModel inside of the Add() method and pass the instance into the View() return method.
@@ -49,13 +50,13 @@ namespace TechJobsPersistentAutograded.Controllers
                 };
                 jobs.AddNewEmployer(employer);
                 jobs.SaveChanges();
-                return Redirect("Index");
+                return Redirect("/Employer");
             }
             
             return View("Add",addEmployerViewModel);
         }
 
-
+        //This method is used at the index method to create a link about the details of the employee which needs ot be displayed.
         public IActionResult About(int id)
         {
             Employer aboutEmployer = jobs.FindEmployerById(id);

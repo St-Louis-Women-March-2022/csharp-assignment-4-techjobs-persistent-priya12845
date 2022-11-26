@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TechJobsPersistentAutograded.Data
 {
+    //This class for the database connection. For the migration to create the table in the database and the CRUD operations
     public class JobDbContext : DbContext
     {
         public DbSet<Job> Jobs { get; set; }
@@ -15,6 +16,7 @@ namespace TechJobsPersistentAutograded.Data
         {
         }
 
+        //This method for the compound primary key. This is the place you put the configuration information about your models.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<JobSkill>()
