@@ -19,17 +19,23 @@
         <label asp-for="EmployerId">Employer</label>
         <select asp-for="EmployerId" asp-items="@Model.Employer"></select>
     </div>
+
+    <!--This part I add for the checkbox display of all the skills at the get request of the add job method-->
     <div class="form-group">
-        <label asp-for="Id">Skills</label>
-        <select asp-for="Id" asp-items="@Model.JobSkills"></select>
+        <label asp-for="Id">Please select the Skills</label>
+        
+            @foreach(SelectListItem item in @Model.JobSkills)
+                {
+                     <li>
+                    <input name="selectedSkills" value=@item.Value type="checkbox" />@item.Text
+                     </li>
+                }
     </div>
+
     <div>
         <a asp-controller="Employer" asp-action="Add" >Add Employer</a>
     </div>
-
-
     <input type="submit" value="Add Job" />
-
 </form>
 
 

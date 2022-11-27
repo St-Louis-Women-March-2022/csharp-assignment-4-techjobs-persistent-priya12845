@@ -58,8 +58,23 @@ namespace TechJobsPersistentAutograded.Controllers
                     Name = addJobViewModel.Name,
                     EmployerId = theEmployer.Id
                     
-               };
+                };
+
+                
+                for(int i = 0; i < selectedSkills.Length; i++)
+                {
+                    JobSkill jobSkill = new JobSkill
+                    {
+                        JobId = job.Id,
+                        Job = job,
+                        SkillId = int.Parse(selectedSkills[i]),
+                    };
+                _repo.AddNewJobSkill(jobSkill);
+                }
+                
+                
                 _repo.AddNewJob(job);
+                
                 _repo.SaveChanges();
                 return Redirect("Index");
             }
