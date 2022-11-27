@@ -2,6 +2,7 @@
 
 namespace TechJobsPersistentAutograded.Models
 {
+    //This class is for many to many relationship where jobid and skillid together will make a primary key
     public class JobSkill
     {
         public int JobId { get; set; }

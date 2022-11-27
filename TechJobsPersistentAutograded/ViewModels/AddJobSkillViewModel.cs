@@ -9,14 +9,14 @@ namespace TechJobsPersistentAutograded.ViewModels
     public class AddJobSkillViewModel
     {
         [Required(ErrorMessage = "Job is required")]
-        public int JobId { get; set; }
+        public int JobId { get; set; } 
+
+        public Job Job { get; set; }
 
         [Required(ErrorMessage = "Skill is required")]
         public int SkillId { get; set; }
 
-        public Job Job { get; set; }
-
-        public List<SelectListItem> Skills { get; set; }
+        public List<SelectListItem> Skills { get; set; } //List of available skills.
 
         public AddJobSkillViewModel(Job theJob, List<Skill> possibleSkills)
         {
@@ -31,7 +31,7 @@ namespace TechJobsPersistentAutograded.ViewModels
                 });
             }
 
-            Job = theJob;
+            Job = theJob; //this will get passed into the view too
         }
 
         public AddJobSkillViewModel()

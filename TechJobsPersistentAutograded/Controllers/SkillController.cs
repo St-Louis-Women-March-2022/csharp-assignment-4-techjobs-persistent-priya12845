@@ -83,7 +83,39 @@ namespace TechJobsPersistentAutograded.Controllers
 
             return View(viewModel);
         }
+        
+        //This is for the skills to be added to the job.This is the get handler 
+        public IActionResult AddJobSkill(int id)
+        {
+            Job theJob = _repo.FindJobById(id); //Find the particular job
+            List<Skill> possibleSkills = _repo.GetAllSkills().ToList(); //All the possible skills
 
+            AddJobSkillViewModel viewModel = new AddJobSkillViewModel(theJob, possibleSkills);
+
+            return View(viewModel);
+        }
+
+        //This is the post handler for adding the jobskill table entries
+        [HttpPost]
+        public IActionResult AddJobSkill(AddJobSkillViewModel viewModel)
+        {
+            if(ModelState.IsValid)
+            {
+                int jobId = viewModel.JobId;
+                int skillId = viewModel.SkillId;
+
+                JobSkill jobSkill = new JobSkill
+                {
+                    JobId = jobId,
+                    SkillId = skillId
+                    
+                };
+                _repo.AddNewJobSkill(jobSkill);
+                _repo.SaveChanges();
+                return Redirect("/Home/Detail/" + jobId);
+            }
+            return View(viewModel);
+        }
         public IActionResult About(int id)
         {
             IEnumerable<JobSkill> jobSkills = _repo.FindJobSkillsById(id);
